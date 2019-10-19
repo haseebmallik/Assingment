@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Menu Nav | KeyBoard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 15%;
+            /*height: 100vh;*/
+            padding: 10px;
+            color: #fff;
+            background-color: #000000db;
+        }
+
+        .container,
+        .view-nav-page {
+            display: inline-block;
+        }
+
+        .view-nav-page {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: calc(100% - 15px - 10px - 15%);
+            color: #fff;
+            background-color: #4e4c4cdb;
+        }
+
+        .view-page {
+            display: none;
+        }
+
+        p.nav-home {
+            display: block;
+        }
+
+        .active {
+            background-color: #b0ababf0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        li {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            cursor: pointer;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border-radius: 5px;
+        }
+        .flex-item{
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+
+        }
+        .page-flex{
+            height: 150px;
+            width: 140px;
+            background: pink;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <ul>
+            <li class="nav-item active nav-home"><a>Home</a></li>
+            <li class="nav-item nav-about"><a>About</a></li>
+            <li class="nav-item nav-gallery"><a>Gallery</a></li>
+            <li class="nav-item nav-picture"><a>Pictures</a></li>
+            <li class="nav-item nav-contact"><a>Contact</a></li>
+        </ul>
+    </div>
+    <div class="view-nav-page">
+
+        <div class="view-page nav-home">
+           <div class="flex-item">
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+               <div class="page-flex"></div>
+           </div>
+       </div>
+       <div class="view-page nav-about">About</div>
+       <div class="view-page nav-gallery">Gallery</div>
+       <div class="view-page nav-picture">Pictures</div>
+       <div class="view-page nav-contact">Contact</div>
+   </div>
+
+   <script>
+
+    'use strict';
+
+    var items, which, index, views;
+    items = document.querySelectorAll('.nav-item');
+    views = document.querySelectorAll('.view-page');
+    index = 0;
+
+    function handleMenu(index) {
+
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('active');
+            views[i].style.display = 'none';
+        }
+        items[index].classList.add('active');
+        if (items[index].classList[-1] == views[index].classList[-1]) {
+            views[index].style.display = 'block';
+        } else views[index].style.display = 'block';
+    }
+
+    window.onkeydown = function (e) {
+        console.log(e.which ||e.keyCode);
+        which = e.keyCode || e.which;
+        switch (which) {
+             case 37:
+            if(e.keyCode == 37 ){
+                document.querySelector('.container').style.display = 'none';
+            }
+            break;
+            case 38:
+            if (index > 0) {
+                index = index - 1;
+                handleMenu(index);
+            } else index = items.length-1,handleMenu(index);
+            break;
+            case 39:
+            if(e.keyCode == 39 ){
+                document.querySelector('.container').style.display = 'block';
+            }
+            break;
+            case 40:
+            if (index < items.length - 1) {
+                index++;
+                handleMenu(index);
+            } else index = 0,handleMenu(index);
+            break;
+
+        }
+    }
+</script>
+
+</body>
+
+</html>
